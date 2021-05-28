@@ -1,0 +1,62 @@
+Cambios en Patrones de desarrollo a implementar. Entrega Voluntaria (17 mayo)
+
+Se lograron cumplir todos los requerimientos especificados para 
+la entrega final del proyecto "Editor de Texto"
+
+
+Singleton: 
+Al ejecutar el programa aparecerá al principio 
+una ventana con los botones (“Open Text-Editor”) y (“Open File”).
+Si el usuario selecciona “Open Text-Editor” una clase “SegundaVentana” 
+revisará que solo pueda haber una instancia de "SegundaVentana".
+
+Es decir, "PrimeraVentana" representa una pagina web y "SegundaVentana"
+representa el editor de texto que ofrece la página. Una vez abierta la 
+"SegundaVentana" no se podrán hacer más instancias de esta con los botones
+originales de "PrimeraVentana" 
+(requerimiento 1)
+
+Fachada:
+En "SegundaVentana" se encuentran los botones 
+de la aplicación, cada botón cuenta con un actionListener 
+especializado (Open File, Save, etc), este comportamiento
+complejo es escondido mediante una fachada, es decir,
+cada actionListener en una clase aparte así, "SegundaVentana"
+termina siendo una clase para el diseño visual unicamente.
+
+Hay un menú desplegabe JComboBox que determina las bases de datos 
+SQL, ORACLE y TEXTO, si se elige una opción del JComboBox, se creará 
+en Disco el archivo txt respectivo, este archivo se crea automáticamente
+en la misma carpeta del java project en caso de no existir.
+(requerimiento 2)
+
+Strategy
+Los requerimientos 3, 4 y 5 fueron implementados a través del patrón 
+Strategy, así, todas estas opciones se manejan a través de JComboBox's y un
+solo contexto "ActionListenerContext" y una interface "IDraftUser"
+
+También se empleó un segundo patrón strategy para lograr abrir las bases de datos.txt
+llamadas desde su respectivo ComboBox con el contexto "ActionListenerCreateContext"
+y la interface única "ICreateUser". 
+
+El requerimiento 6 no necesitó de un patrón especial, su implementación
+está en una clase incluida en la fachada ya mencionada.
+
+Observer
+Para el requermiento 7 se empleó el patrón observer entre el observado
+concreto "NewJTextArea" y el observador concreto "WordCounter" el ActionListener
+llamado "ActionListenerCount" cumple el puesto de "cliente" que llama al
+observador concreto y al observado concreto.
+
+La clase NewJTextArea es hija de la clase de java JTextArea, fue necesario
+hacer esta herencia para poder implementar el patrón observador 
+
+
+Al principió la meta era lograr que el contador de palabras en el JTextArea
+fuera automático pero se desistió de esta meta, a la final el contador de palabras
+es asíncrono y debe ser llamado con un botón "Re-count"
+(requerimiento 7)
+
+Toda la aplicación ha sido probada para ser a prueba de errores. 
+
+---------------------------------------------------------------
